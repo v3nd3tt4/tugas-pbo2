@@ -16,30 +16,28 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author vendetta
  */
-public class KaryawanAddFrame extends javax.swing.JFrame {
+public class PemasokAddFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form KaryawanAddFrame
+     * Creates new form PemasokAddFrame
      */
-    public KaryawanAddFrame() {
+    public PemasokAddFrame() {
         initComponents();
     }
     
-    public KaryawanAddFrame(int id) {
+    public PemasokAddFrame(int id) {
         initComponents();
         try {
             Connection koneksi = Basisdata.getConnection();
-            String findSQL = "SELECT * FROM karyawan WHERE id="+id;
+            String findSQL = "SELECT * FROM pemasok WHERE id="+id;
             Statement statement = koneksi.createStatement();
             ResultSet resultSet = statement.executeQuery(findSQL);
             while(resultSet.next()){
                 idTextField.setText(resultSet.getString("id"));
-                namaKaryawanTextField.setText(resultSet.getString("nama_karyawan"));
-                nomorHpTextField.setText(resultSet.getString("nomor_hp"));
-                alamatTextField.setText(resultSet.getString("alamat"));
-                emailTextField.setText(resultSet.getString("email"));
-                passwordTextField.setText(resultSet.getString("password"));
-                levelComboBox.setSelectedItem(resultSet.getString("level"));
+                namaPemasokTextField.setText(resultSet.getString("nama_pemasok"));
+                namaKontakTextField.setText(resultSet.getString("nama_kontak"));
+                NomorHpTextField.setText(resultSet.getString("nomor_hp"));
+                AlamatTextField.setText(resultSet.getString("alamat"));
             }
             koneksi.close();
         } catch (SQLException ex) {
@@ -47,7 +45,7 @@ public class KaryawanAddFrame extends javax.swing.JFrame {
         }
     }
 
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,28 +59,24 @@ public class KaryawanAddFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         idTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        namaKaryawanTextField = new javax.swing.JTextField();
+        namaPemasokTextField = new javax.swing.JTextField();
         simpanButton = new javax.swing.JButton();
         batalButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        nomorHpTextField = new javax.swing.JTextField();
+        namaKontakTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        alamatTextField = new javax.swing.JTextField();
+        NomorHpTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        emailTextField = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        passwordTextField = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        levelComboBox = new javax.swing.JComboBox<>();
+        AlamatTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         judulLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        judulLabel.setText("Tambah Data Karyawan");
+        judulLabel.setText("Tambah Data Pemasok");
 
         jLabel1.setText("ID");
 
-        jLabel2.setText("Nama Karyawan");
+        jLabel2.setText("Nama Pemasok");
 
         simpanButton.setText("Simpan");
         simpanButton.addActionListener(new java.awt.event.ActionListener() {
@@ -98,23 +92,17 @@ public class KaryawanAddFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Nomor HP");
+        jLabel3.setText("Nomor Kontak");
 
-        jLabel4.setText("Alamat");
+        jLabel4.setText("Nomor HP");
 
-        jLabel5.setText("Email");
+        jLabel5.setText("Alamat");
 
-        emailTextField.addActionListener(new java.awt.event.ActionListener() {
+        AlamatTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailTextFieldActionPerformed(evt);
+                AlamatTextFieldActionPerformed(evt);
             }
         });
-
-        jLabel6.setText("Password");
-
-        jLabel7.setText("Level");
-
-        levelComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "user" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,28 +118,24 @@ public class KaryawanAddFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                                 .addComponent(judulLabel))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
+                                    .addComponent(jLabel5))
                                 .addGap(56, 56, 56)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(simpanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(batalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(namaKaryawanTextField)
+                                    .addComponent(namaPemasokTextField)
                                     .addComponent(idTextField)
-                                    .addComponent(nomorHpTextField)
-                                    .addComponent(alamatTextField)
-                                    .addComponent(emailTextField)
-                                    .addComponent(passwordTextField)
-                                    .addComponent(levelComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(namaKontakTextField)
+                                    .addComponent(NomorHpTextField)
+                                    .addComponent(AlamatTextField))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(79, 79, 79))))
         );
@@ -167,28 +151,20 @@ public class KaryawanAddFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(namaKaryawanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(namaPemasokTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomorHpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(namaKontakTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(alamatTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NomorHpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(levelComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                    .addComponent(AlamatTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(simpanButton)
                     .addComponent(batalButton))
@@ -202,13 +178,11 @@ public class KaryawanAddFrame extends javax.swing.JFrame {
         if(idTextField.getText().equals("")){
             try {
                 Connection koneksi = Basisdata.getConnection();
-                String insertSQL = "INSERT INTO karyawan SET " +
-                        "nama_karyawan = '" + namaKaryawanTextField.getText() +"'," +
-                        "nomor_hp = '" + nomorHpTextField.getText() +"'," +
-                        "alamat = '" + alamatTextField.getText() +"',"+
-                        "email = '" + emailTextField.getText() +"'," +
-                        "password = '" + hashMD5(passwordTextField.getText()) +"'," +
-                        "level = '" + levelComboBox.getSelectedItem().toString() +"'" ;
+                String insertSQL = "INSERT INTO pemasok SET " +
+                "nama_pemasok = '" + namaPemasokTextField.getText() +"'," +
+                "nama_kontak = '" + namaKontakTextField.getText() +"'," +
+                "nomor_hp = '" + NomorHpTextField.getText() +"',"+
+                "alamat = '" + AlamatTextField.getText() +"'" ;
                 System.out.println(insertSQL);
                 Statement statement = koneksi.createStatement();
                 statement.executeUpdate(insertSQL);
@@ -220,13 +194,11 @@ public class KaryawanAddFrame extends javax.swing.JFrame {
         } else {
             try {
                 Connection koneksi = Basisdata.getConnection();
-                String updateSQL = "UPDATE karyawan SET " +
-                "nama_karyawan = '" + namaKaryawanTextField.getText() +"'," +
-                "nomor_hp = '" + nomorHpTextField.getText() +"'," +
-                "alamat = '" + alamatTextField.getText() +"',"+
-                "email = '" + emailTextField.getText() +"'," +
-                "password = '" + hashMD5(passwordTextField.getText()) +"'," +
-                "level = '" + levelComboBox.getSelectedItem().toString() +"'"+
+                String updateSQL = "UPDATE pemasok SET " +
+                "nama_pemasok = '" + namaPemasokTextField.getText() +"'," +
+                "nama_kontak = '" + namaKontakTextField.getText() +"'," +
+                "nomor_hp = '" + NomorHpTextField.getText() +"',"+
+                "alamat = '" + AlamatTextField.getText() +"'" +
                 " WHERE id=" + idTextField.getText();
                 System.out.println(updateSQL);
                 Statement statement = koneksi.createStatement();
@@ -243,9 +215,9 @@ public class KaryawanAddFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_batalButtonActionPerformed
 
-    private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
+    private void AlamatTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlamatTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_emailTextFieldActionPerformed
+    }//GEN-LAST:event_AlamatTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,57 +236,37 @@ public class KaryawanAddFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KaryawanAddFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KaryawanViewFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KaryawanAddFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KaryawanViewFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KaryawanAddFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KaryawanViewFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KaryawanAddFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KaryawanViewFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KaryawanAddFrame().setVisible(true);
+                new PemasokAddFrame().setVisible(true);
             }
         });
     }
-    
-    // Fungsi untuk menghasilkan hash MD5
-public String hashMD5(String input) {
-    try {
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] messageDigest = md.digest(input.getBytes());
-        // Konversi byte array ke hexadecimal string
-        StringBuilder sb = new StringBuilder();
-        for (byte b : messageDigest) {
-            sb.append(String.format("%02x", b));
-        }
-        return sb.toString();
-    } catch (NoSuchAlgorithmException e) {
-        throw new RuntimeException("MD5 hashing algorithm not found", e);
-    }
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField alamatTextField;
+    private javax.swing.JTextField AlamatTextField;
+    private javax.swing.JTextField NomorHpTextField;
     private javax.swing.JButton batalButton;
-    private javax.swing.JTextField emailTextField;
     private javax.swing.JTextField idTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel judulLabel;
-    private javax.swing.JComboBox<String> levelComboBox;
-    private javax.swing.JTextField namaKaryawanTextField;
-    private javax.swing.JTextField nomorHpTextField;
-    private javax.swing.JTextField passwordTextField;
+    private javax.swing.JTextField namaKontakTextField;
+    private javax.swing.JTextField namaPemasokTextField;
     private javax.swing.JButton simpanButton;
     // End of variables declaration//GEN-END:variables
 }

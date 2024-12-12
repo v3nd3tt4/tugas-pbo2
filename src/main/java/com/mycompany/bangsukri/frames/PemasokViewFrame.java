@@ -17,12 +17,12 @@ import javax.swing.table.TableModel;
  *
  * @author vendetta
  */
-public class KaryawanViewFrame extends javax.swing.JFrame {
+public class PemasokViewFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form KaryawanViewFrame
+     * Creates new form PemasokViewFrame
      */
-    public KaryawanViewFrame() {
+    public PemasokViewFrame() {
         initComponents();
     }
 
@@ -55,9 +55,9 @@ public class KaryawanViewFrame extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setText("Data Karyawan");
+        jLabel1.setText("Data Pemasok");
 
-        jLabel2.setText("Cari Karyawan");
+        jLabel2.setText("Cari Pemasok");
 
         cariButton.setText("Cari");
         cariButton.addActionListener(new java.awt.event.ActionListener() {
@@ -68,20 +68,20 @@ public class KaryawanViewFrame extends javax.swing.JFrame {
 
         viewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nama Karyawan", "Nomor HP", "Alamat", "Email", "Password", "Level"
+                "Id", "Nama Pemasok", "Nama Kontak", "Nomor HP", "Alamat"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -189,23 +189,21 @@ public class KaryawanViewFrame extends javax.swing.JFrame {
         try {
             String kataKunci = cariTextField.getText();
             Connection koneksi = Basisdata.getConnection();
-            String selectSQL = "SELECT * FROM karyawan WHERE nama_karyawan like '%"+kataKunci+"%' ";
+            String selectSQL = "SELECT * FROM pemasok WHERE nama_pemasok like '%"+kataKunci+"%' ";
             Statement statement = koneksi.createStatement();
             ResultSet resultSet = statement.executeQuery(selectSQL);
 
-            Object[] row = new Object[7];
+            Object[] row = new Object[5];
             DefaultTableModel model = (DefaultTableModel) viewTable.getModel();
             model.setRowCount(0);
 
             while(resultSet.next()){
                 row[0] = resultSet.getInt("id");
-              	row[1] = resultSet.getString("nama_karyawan");
-                row[2] = resultSet.getString("nomor_hp");
-                row[3] = resultSet.getString("alamat");
-                row[4] = resultSet.getString("email");
-                row[5] = resultSet.getString("password");
-                row[6] = resultSet.getString("level");
-                model.addRow(row);
+              	row[1] = resultSet.getString("nama_pemasok");
+                row[2] = resultSet.getString("nama_kontak");
+                row[3] = resultSet.getString("nomor_hp");
+                row[4] = resultSet.getString("alamat");
+              	model.addRow(row);
             }
             koneksi.close();
         } catch (SQLException ex) {
@@ -214,7 +212,7 @@ public class KaryawanViewFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cariButtonActionPerformed
 
     private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
-        KaryawanAddFrame f = new KaryawanAddFrame();
+        PemasokAddFrame f = new PemasokAddFrame();
         f.setVisible(true);
     }//GEN-LAST:event_tambahButtonActionPerformed
 
@@ -223,7 +221,7 @@ public class KaryawanViewFrame extends javax.swing.JFrame {
         if(barisTerpilih >= 0){
             TableModel model = viewTable.getModel();
             int id = (int) model.getValueAt(barisTerpilih, 0);
-            KaryawanAddFrame f = new KaryawanAddFrame(id);
+            PemasokAddFrame f = new PemasokAddFrame(id);
             f.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null, "Pilih data");
@@ -243,7 +241,7 @@ public class KaryawanViewFrame extends javax.swing.JFrame {
                     TableModel model = viewTable.getModel();
                     int id = (int) model.getValueAt(barisTerpilih, 0);
                     Connection koneksi = Basisdata.getConnection();
-                    String deleteSQL = "DELETE FROM karyawan WHERE id="+id;
+                    String deleteSQL = "DELETE FROM pemasok WHERE id="+id;
                     Statement statement = koneksi.createStatement();
                     statement.executeUpdate(deleteSQL);
                     koneksi.close();
@@ -267,23 +265,21 @@ public class KaryawanViewFrame extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         setLocationRelativeTo(null);
         try {
-            Connection koneksi = Basisdata.getConnection();
-            String selectSQL = "SELECT * FROM karyawan";
+            Connection koneksi = com.mycompany.bangsukri.db.Basisdata.getConnection();
+            String selectSQL = "SELECT * FROM pemasok";
             Statement statement = koneksi.createStatement();
             ResultSet resultSet = statement.executeQuery(selectSQL);
             
-            Object[] row = new Object[7];
+            Object[] row = new Object[5];
             DefaultTableModel model = (DefaultTableModel) viewTable.getModel();
             model.setRowCount(0);
             
             while(resultSet.next()){
          	row[0] = resultSet.getInt("id");
-              	row[1] = resultSet.getString("nama_karyawan");
-                row[2] = resultSet.getString("nomor_hp");
-                row[3] = resultSet.getString("alamat");
-                row[4] = resultSet.getString("email");
-                row[5] = resultSet.getString("password");
-                row[6] = resultSet.getString("level");
+              	row[1] = resultSet.getString("nama_pemasok");
+                row[2] = resultSet.getString("nama_kontak");
+                row[3] = resultSet.getString("nomor_hp");
+                row[4] = resultSet.getString("alamat");
               	model.addRow(row);
          }
 
@@ -291,7 +287,6 @@ public class KaryawanViewFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-
     }//GEN-LAST:event_formWindowActivated
 
     /**
@@ -324,7 +319,7 @@ public class KaryawanViewFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KaryawanViewFrame().setVisible(true);
+                new PemasokViewFrame().setVisible(true);
             }
         });
     }
@@ -342,4 +337,5 @@ public class KaryawanViewFrame extends javax.swing.JFrame {
     private javax.swing.JButton ubahButton;
     private javax.swing.JTable viewTable;
     // End of variables declaration//GEN-END:variables
+   
 }
